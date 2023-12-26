@@ -5,6 +5,8 @@ import com.memorystudio.letter.domain.LetterRepository;
 import com.memorystudio.letter.dto.LetterDto;
 import com.memorystudio.member.domain.Friend;
 import com.memorystudio.member.domain.FriendRepository;
+import com.memorystudio.member.domain.Member;
+import com.memorystudio.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class LetterService {
     private final LetterRepository letterRepository;
     private final FriendRepository friendRepository;
+    private final MemberRepository memberRepository;
 
     public LetterDto getLetter(Long letterId) {
         Optional<Letter> optionalLetter = letterRepository.findById(letterId);
@@ -32,18 +35,15 @@ public class LetterService {
     }
 
     public void saveLetter(LetterDto letterDto) {
-        Optional<Friend> optionalFriend = friendRepository.findById(letterDto.getFriendId());
-        if (optionalFriend.isPresent()) {
-            Letter newLetter = Letter.builder()
-                    .id(letterDto.getUserId())
-                    .date(letterDto.getDate())
-                    .content(letterDto.getContent())
-                    .friend(optionalFriend.get())
-                    .build();
-            letterRepository.save(newLetter);
-        } else {
-            throw new RuntimeException("Failed to save Letter (Not a Friend)");
-        }
+        Member member1 = memberRepository.findById(letterDto.getUserId())
+                .orElseThrow(IllegalArgumentException::new);
+        Member member2 = memberRepository.findByName(letterDto.getFriendName())
+                .orElseThrow(IllegalArgumentException::new);
 
+        Friend friend = friendRepository.findByMember1AndMember2(member1, member2)
+                .orElseThrow(IllegalArgumentException::new);
+
+        Letter letter = new Letter(letterDto, friend);
+        letterRepository.save(letter);
     }
 }

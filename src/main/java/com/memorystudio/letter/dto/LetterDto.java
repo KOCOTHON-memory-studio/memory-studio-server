@@ -7,7 +7,8 @@ import lombok.Data;
 @Builder
 public class LetterDto {
     private Long userId;
-    private Long friendId;
+    private String friendName;
     private String content;
-    private String date;
+    private String createDate;
+    private String openDate;
 }
