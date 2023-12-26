@@ -4,10 +4,7 @@ import com.memorystudio.photo.Dto.*;
 import com.memorystudio.photo.Service.PhotoService;
 import com.memorystudio.photo.domain.Photo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class PhotoController {
     private final PhotoService photoService;
 
     @GetMapping("/api/photo")
-    public List<PhotoResponseDTO> getPhotoMonth(@RequestBody PhotoMonthRequestDTO request) {
+    public List<PhotoResponseDTO> getPhotoMonth(@ModelAttribute PhotoMonthRequestDTO request) {
         return photoService.getPhotoMonth(request);
     }
 
