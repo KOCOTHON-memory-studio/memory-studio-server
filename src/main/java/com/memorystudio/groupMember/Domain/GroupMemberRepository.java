@@ -15,7 +15,7 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
 
     @Transactional
     @Modifying
-    @Query("insert into GROUPMEMBER (group_id, member_id) VALUES (?1, ?2)")
+    @Query("insert into com.memorystudio.groupMember.Domain.GroupMember (group, member) VALUES (?1, ?2)")
     void insertGroupIdAndMemberId(Long groupId, Long memberId);
 
     List<GroupMember> findAllByMember(Member member);
