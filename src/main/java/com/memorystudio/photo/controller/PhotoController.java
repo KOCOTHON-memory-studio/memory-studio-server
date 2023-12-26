@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class PhotoController {

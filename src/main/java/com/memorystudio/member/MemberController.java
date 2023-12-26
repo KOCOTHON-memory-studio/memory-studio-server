@@ -6,7 +6,7 @@ import com.memorystudio.member.dto.SignupRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
