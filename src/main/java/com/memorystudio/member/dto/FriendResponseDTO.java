@@ -12,8 +12,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FriendResponseDTO {
     private String username;
+    private Long friendId;
 
     public FriendResponseDTO(Friend friend) {
         this.username = friend.getMember2().getName();
+        this.friendId = friend.getMember2().getId();
     }
 }
