@@ -4,6 +4,7 @@ import com.memorystudio.group.Domain.Group;
 import com.memorystudio.group.Domain.GroupRepository;
 import com.memorystudio.group.Dto.GroupCreateDTO;
 import com.memorystudio.group.Dto.GroupDto;
+import com.memorystudio.group.Dto.GroupResponseDTO;
 import com.memorystudio.groupMember.Domain.GroupMember;
 import com.memorystudio.groupMember.Domain.GroupMemberRepository;
 import com.memorystudio.member.domain.Member;
@@ -34,21 +35,23 @@ public class GroupService {
         }
     }
 
-    public void addGroup(GroupCreateDTO request) {
+    public GroupResponseDTO addGroup(GroupCreateDTO request) {
         Group group = new Group(request.getGroupName());
         groupRepository.save(group);
+        GroupMember groupMember = groupMemberRepository.save(new GroupMember(group, memberRepository.findById(request.getUserId()).get()));
         request.getList().stream()
                 .forEach(userId ->
                         groupMemberRepository.save(new GroupMember(group, memberRepository.findById(userId).get())));
+        return new GroupResponseDTO(group.getName(), group.getId(), groupMember.getId());
     }
 
-    public List<Group> getGroups(Long memberId) {
+    public List<GroupResponseDTO> getGroups(Long memberId) {
         Member member = memberRepository.findById(memberId)
                         .orElseThrow(IllegalArgumentException::new);
 
         return groupMemberRepository.findAllByMember(member)
                 .stream()
-                .map(GroupMember::getGroup)
+                .map(gm -> new GroupResponseDTO(gm.getGroup().getName(), gm.getGroup().getId(), gm.getId()))
                 .toList();
     }
 }
