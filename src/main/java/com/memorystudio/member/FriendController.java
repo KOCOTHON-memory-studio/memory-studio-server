@@ -1,6 +1,7 @@
 package com.memorystudio.member;
 
-import com.memorystudio.member.dto.FriendDto;
+import com.memorystudio.member.dto.FriendDTO;
+import com.memorystudio.member.dto.FriendResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,12 @@ public class FriendController {
     private final FriendService friendService;
 
     @PostMapping("/api/friend")
-    public void addFriend(@RequestBody FriendDto friendDto) {
+    public void addFriend(@RequestBody FriendDTO friendDto) {
         friendService.save(friendDto);
     }
 
     @GetMapping("/api/friend")
-    public List<FriendDto> getFriendList(@RequestParam Long userId) {
+    public List<FriendResponseDTO> getFriendList(@RequestParam Long userId) {
         return friendService.getFriendList(userId);
     }
 }
