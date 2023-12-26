@@ -39,7 +39,7 @@ public class GroupService {
         groupRepository.save(group);
         request.getList().stream()
                 .forEach(userId ->
-                        groupMemberRepository.insertGroupIdAndMemberId(group.getId(), userId));
+                        groupMemberRepository.save(new GroupMember(group, memberRepository.findById(userId).get())));
     }
 
     public List<Group> getGroups(Long memberId) {
