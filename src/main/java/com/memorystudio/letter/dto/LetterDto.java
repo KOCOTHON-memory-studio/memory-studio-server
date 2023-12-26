@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class LetterDto {
-    private Long id;
-    private Long friend;
+    private Long userId;
+    private Long friendId;
     private String content;
     private String date;
 }

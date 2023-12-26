@@ -21,9 +21,9 @@ public class LetterService {
         if (optionalLetter.isPresent()) {
             Letter letter = optionalLetter.get();
             return LetterDto.builder()
-                    .id(letter.getId())
+                    .userId(letter.getId())
                     .date(letter.getDate())
-                    .friend(letter.getFriend().getId())
+                    .friendId(letter.getFriend().getId())
                     .content(letter.getContent())
                     .build();
         } else {
@@ -32,10 +32,10 @@ public class LetterService {
     }
 
     public void saveLetter(LetterDto letterDto) {
-        Optional<Friend> optionalFriend = friendRepository.findById(letterDto.getFriend());
+        Optional<Friend> optionalFriend = friendRepository.findById(letterDto.getFriendId());
         if (optionalFriend.isPresent()) {
             Letter newLetter = Letter.builder()
-                    .id(letterDto.getId())
+                    .id(letterDto.getUserId())
                     .date(letterDto.getDate())
                     .content(letterDto.getContent())
                     .friend(optionalFriend.get())
