@@ -28,9 +28,9 @@ public class Letter {
     String openDate;
 
     public Letter(LetterDto letterDto, Friend friend) {
+        this.content = letterDto.getContent();
+        this.createDate = letterDto.getCreateDate();
+        this.openDate = letterDto.getOpenDate();
         this.friend = friend;
-
     }
-
-
 }
