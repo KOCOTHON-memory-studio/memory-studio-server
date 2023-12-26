@@ -1,6 +1,7 @@
 package com.memorystudio.letter;
 
 import com.memorystudio.letter.dto.LetterDto;
+import com.memorystudio.letter.dto.LetterResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ public class LetterController {
     private final LetterService letterService;
 
     @GetMapping("/api/letter")
-    public LetterDto getLetter(@RequestParam Long letterId) {
+    public LetterResponseDTO getLetter(@RequestParam Long letterId) {
         return letterService.getLetter(letterId);
     }
 

@@ -3,6 +3,7 @@ package com.memorystudio.letter;
 import com.memorystudio.letter.domain.Letter;
 import com.memorystudio.letter.domain.LetterRepository;
 import com.memorystudio.letter.dto.LetterDto;
+import com.memorystudio.letter.dto.LetterResponseDTO;
 import com.memorystudio.member.domain.Friend;
 import com.memorystudio.member.domain.FriendRepository;
 import com.memorystudio.member.domain.Member;
@@ -19,19 +20,11 @@ public class LetterService {
     private final FriendRepository friendRepository;
     private final MemberRepository memberRepository;
 
-    public LetterDto getLetter(Long letterId) {
-        Optional<Letter> optionalLetter = letterRepository.findById(letterId);
-        if (optionalLetter.isPresent()) {
-            Letter letter = optionalLetter.get();
-            return LetterDto.builder()
-                    .userId(letter.getId())
-                    .date(letter.getDate())
-                    .friendId(letter.getFriend().getId())
-                    .content(letter.getContent())
-                    .build();
-        } else {
-            throw new RuntimeException("No Letter");
-        }
+    public LetterResponseDTO getLetter(Long letterId) {
+        Letter letter = letterRepository.findById(letterId)
+                .orElseThrow(IllegalArgumentException::new);
+        return new LetterResponseDTO(letter, letter.getFriend().getMember2().getName());
+
     }
 
     public void saveLetter(LetterDto letterDto) {
