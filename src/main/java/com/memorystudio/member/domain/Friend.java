@@ -2,8 +2,10 @@ package com.memorystudio.member.domain;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
 public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
