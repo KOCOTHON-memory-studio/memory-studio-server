@@ -18,10 +18,8 @@ public class Photo {
     @Column(name = "photo_id")
     private Long id;
 
-    @Column
+    private String name;
     private String dir;
-
-    @Column
     private String date;
 
     @ManyToOne

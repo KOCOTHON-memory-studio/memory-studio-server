@@ -14,7 +14,7 @@ public class MemberController {
 
     @GetMapping("/api/member")
     public MemberIdNameDTO getMember(@RequestParam Long userId) {
-
+        return null;
     }
 
     @PostMapping("/api/login")
