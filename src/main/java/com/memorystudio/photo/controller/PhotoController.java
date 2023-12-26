@@ -1,10 +1,11 @@
 package com.memorystudio.photo.controller;
 
-import com.memorystudio.photo.Dto.*;
+import com.memorystudio.photo.Dto.PhotoDetailResponseDTO;
+import com.memorystudio.photo.Dto.PhotoOnlyDTO;
+import com.memorystudio.photo.Dto.PhotoResponseDTO;
+import com.memorystudio.photo.Dto.PhotoSaveDTO;
 import com.memorystudio.photo.Service.PhotoService;
-import com.memorystudio.photo.domain.Photo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 public class PhotoController {
