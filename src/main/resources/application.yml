@@ -1,19 +1,15 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
         show_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
-        auto_quote_keyword: true
     defer-datasource-initialization: true
 
   datasource:
-    url: jdbc:h2:mem:tes;MODE=MySQL;NON_KEYWORDS=GROUP,photo
-    username: sa
-    driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
+    url: "jdbc:mysql://localhost/Memory"
+    username: "root"
+    password: "" # MySQL ???? ??
+    driver-class-name: com.mysql.cj.jdbc.Driver
