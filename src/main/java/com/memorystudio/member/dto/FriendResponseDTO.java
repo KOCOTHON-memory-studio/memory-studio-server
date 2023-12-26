@@ -1,6 +1,7 @@
 package com.memorystudio.member.dto;
 
 import com.memorystudio.member.domain.Friend;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
+@AllArgsConstructor
 public class FriendResponseDTO {
     private String username;
 

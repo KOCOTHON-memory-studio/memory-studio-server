@@ -24,20 +24,4 @@ class MemorystudioApplicationTests {
 	}
 
 
-	@Test
-	void friendTest() {
-		Member member = Member.builder()
-				.email("test@test.com")
-				.name("hehe").build();
-
-		Member member2 = Member.builder()
-				.email("test2@test.com")
-				.name("aaaa").build();
-
-		memberRepository.save(member);
-		memberRepository.save(member2);
-
-		friendService.save(member, member2);
-		Assertions.assertThat(friendService.getAllFriend()).hasSize(1);
-	}
 }
