@@ -1,11 +1,13 @@
 package com.memorystudio.letter.dto;
 
 import com.memorystudio.letter.domain.Letter;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class LetterListDTO {
     private String username;
     private String friendName;
