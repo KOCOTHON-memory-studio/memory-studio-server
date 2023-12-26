@@ -6,6 +6,7 @@ import com.memorystudio.photo.Dto.*;
 import com.memorystudio.photo.domain.Photo;
 import com.memorystudio.photo.domain.PhotoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class PhotoService {
 
     private final PhotoRepository photoRepository;
@@ -65,11 +67,11 @@ public class PhotoService {
 
         GroupMember groupMember = groupMemberRepository.findById(groupMemberId)
                 .orElseThrow(IllegalArgumentException::new);
-
         Photo photo = Photo.builder()
                 .month(month)
                 .date(date)
                 .groupMember(groupMember)
+                .groupId(groupMember.getGroup().getId())
                 .url(url).build();
         photoRepository.save(photo);
         return photo;

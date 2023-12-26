@@ -34,10 +34,10 @@ public class PhotoController {
     public PhotoSaveDTO savePhoto(
             @RequestParam String month,
             @RequestParam String date,
-            @RequestParam Long groupMemberId,
+            @RequestParam String groupMemberId,
             @RequestParam MultipartFile img
             ) throws IOException {
-        return new PhotoSaveDTO(photoService.save(month, date, groupMemberId, img));
+        return new PhotoSaveDTO(photoService.save(month, date, Long.parseLong(groupMemberId), img));
     }
 
     @GetMapping("/api/photodetail")
