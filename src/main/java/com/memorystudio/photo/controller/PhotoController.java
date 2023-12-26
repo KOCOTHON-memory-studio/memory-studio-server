@@ -16,8 +16,8 @@ public class PhotoController {
     private final PhotoService photoService;
 
     @GetMapping("/api/photo")
-    public List<PhotoResponseDTO> getPhotoMonth(@ModelAttribute PhotoMonthRequestDTO request) {
-        return photoService.getPhotoMonth(request);
+    public List<PhotoResponseDTO> getPhotoMonth(@RequestParam String month, @RequestParam Long groupId) {
+        return photoService.getPhotoMonth(month, groupId);
     }
 
     @PostMapping("/api/photo")

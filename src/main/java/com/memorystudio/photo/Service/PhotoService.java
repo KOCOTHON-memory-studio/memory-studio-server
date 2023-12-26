@@ -23,8 +23,8 @@ public class PhotoService {
         return photoRepository.save(new Photo(request, groupMember));
     }
 
-    public List<PhotoResponseDTO> getPhotoMonth(PhotoMonthRequestDTO request) {
-        return photoRepository.findAllByMonthAndGroupId(request.getMonth(), request.getGroupId()).stream()
+    public List<PhotoResponseDTO> getPhotoMonth(String month, Long groupId) {
+        return photoRepository.findAllByMonthAndGroupId(month, groupId).stream()
                 .map(PhotoResponseDTO::new)
                 .toList();
     }
