@@ -26,5 +26,4 @@ public class MemberController {
     public MemberIdNameDTO signup(@RequestBody SignupRequestDTO request) {
         return memberService.signup(request);
     }
-
 }

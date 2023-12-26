@@ -17,4 +17,8 @@ public class Group {
 
     @Column
     private String name;
+
+    public Group(String name) {
+        this.name = name;
+    }
 }

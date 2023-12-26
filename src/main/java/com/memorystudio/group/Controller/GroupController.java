@@ -1,9 +1,13 @@
 package com.memorystudio.group.Controller;
 
+import com.memorystudio.group.Domain.Group;
+import com.memorystudio.group.Dto.GroupCreateDTO;
 import com.memorystudio.group.Dto.GroupDto;
 import com.memorystudio.group.Service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +20,12 @@ public class GroupController {
     }
 
     @PostMapping(value = "/api/group")
-    public void newGroup(@RequestParam String name){
-        groupService.addGroup(name);
+    public void newGroup(@RequestBody GroupCreateDTO request){
+        groupService.addGroup(request);
+    }
+
+    @GetMapping("/api/groups")
+    public List<Group> getGroups(@RequestParam Long memberId) {
+        return groupService.getGroups(memberId);
     }
 }
