@@ -41,8 +41,9 @@ public class PhotoController {
     }
 
     @GetMapping("/api/photodetail")
-    public List<PhotoDetailResponseDTO> getPhotoDetail(@RequestBody PhotoDetailRequestDTO request) {
-        return photoService.getPhotoDetail(request);
+    public List<PhotoDetailResponseDTO> getPhotoDetail(@RequestParam String month, @RequestParam String date,
+                                                       @RequestParam Long groupId) {
+        return photoService.getPhotoDetail(month, date, groupId);
     }
 
     @GetMapping("/api/gallery")

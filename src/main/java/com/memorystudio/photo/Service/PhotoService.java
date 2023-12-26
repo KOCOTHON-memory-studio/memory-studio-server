@@ -40,13 +40,11 @@ public class PhotoService {
                 .toList();
     }
 
-    public List<PhotoDetailResponseDTO> getPhotoDetail(PhotoDetailRequestDTO request) {
+    public List<PhotoDetailResponseDTO> getPhotoDetail(String month, String date, Long groupId) {
 
         List<PhotoDetailResponseDTO> photoList = photoRepository
                 .findAllByMonthAndDateAndGroupId(
-                        request.getMonth(),
-                        request.getDate(),
-                        request.getGroupId()).stream()
+                        month, date, groupId).stream()
                 .map(PhotoDetailResponseDTO::new)
                 .toList();
         return photoList;
