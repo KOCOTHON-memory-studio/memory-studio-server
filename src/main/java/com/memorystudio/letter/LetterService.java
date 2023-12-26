@@ -3,6 +3,7 @@ package com.memorystudio.letter;
 import com.memorystudio.letter.domain.Letter;
 import com.memorystudio.letter.domain.LetterRepository;
 import com.memorystudio.letter.dto.LetterDto;
+import com.memorystudio.letter.dto.LetterListDTO;
 import com.memorystudio.letter.dto.LetterResponseDTO;
 import com.memorystudio.member.domain.Friend;
 import com.memorystudio.member.domain.FriendRepository;
@@ -11,6 +12,7 @@ import com.memorystudio.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,11 @@ public class LetterService {
 
         Letter letter = new Letter(letterDto, friend);
         letterRepository.save(letter);
+    }
+
+    public List<LetterListDTO> getLetterList(Long userId) {
+        return letterRepository.findAllByUserId(userId).stream()
+                .map(LetterListDTO::new)
+                .toList();
     }
 }
