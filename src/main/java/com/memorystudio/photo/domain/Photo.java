@@ -31,7 +31,6 @@ public class Photo {
 
     public Photo(PhotoSaveDTO request, GroupMember groupMember) {
         this.groupMember = groupMember;
-        this.url = request.getUrl();
         this.month = request.getMonth();
         this.date = request.getDate();
         this.groupId = groupMember.getGroup().getId();

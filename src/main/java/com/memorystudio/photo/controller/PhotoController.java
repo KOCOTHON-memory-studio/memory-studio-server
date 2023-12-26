@@ -4,8 +4,17 @@ import com.memorystudio.photo.Dto.*;
 import com.memorystudio.photo.Service.PhotoService;
 import com.memorystudio.photo.domain.Photo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @CrossOrigin
@@ -13,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PhotoController {
 
+    private final String PATH = "/home/ec2-user/img/";
     private final PhotoService photoService;
 
     @GetMapping("/api/photo")
@@ -21,12 +31,37 @@ public class PhotoController {
     }
 
     @PostMapping("/api/photo")
-    public Photo savePhoto(@RequestBody PhotoSaveDTO request) {
-        return photoService.save(request);
+    public PhotoSaveDTO savePhoto(
+            @RequestParam String month,
+            @RequestParam String date,
+            @RequestParam Long groupMemberId,
+            @RequestParam MultipartFile img
+            ) throws IOException {
+        return new PhotoSaveDTO(photoService.save(month, date, groupMemberId, img));
     }
 
     @GetMapping("/api/photodetail")
     public List<PhotoDetailResponseDTO> getPhotoDetail(@RequestBody PhotoDetailRequestDTO request) {
         return photoService.getPhotoDetail(request);
     }
+
+    @GetMapping("/api/gallery")
+    public List<PhotoOnlyDTO> getPhotoGallery(@RequestParam Long userId) {
+        return photoService.getPhotoGallery(userId);
+    }
+
+    @GetMapping("/img")
+    public ResponseEntity<byte[]> getImage(@RequestParam String url) {
+        File file = new File(PATH + url + ".png");
+        ResponseEntity<byte[]> result=null;
+        try {
+            HttpHeaders headers=new HttpHeaders();
+            headers.add("Content-Type", Files.probeContentType(file.toPath()));
+            result=new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),headers, HttpStatus.OK );
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

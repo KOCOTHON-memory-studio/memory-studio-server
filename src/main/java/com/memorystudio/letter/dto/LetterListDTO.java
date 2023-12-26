@@ -9,14 +9,14 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class LetterListDTO {
-    private String username;
+    private String userName;
     private String friendName;
     private String content;
     private String createDate;
     private String openDate;
 
     public LetterListDTO(Letter l) {
-        this.username = l.getFriend().getMember1().getName();
+        this.userName = l.getFriend().getMember1().getName();
         this.friendName = l.getFriend().getMember2().getName();
         this.content = l.getContent();
         this.createDate = l.getCreateDate();

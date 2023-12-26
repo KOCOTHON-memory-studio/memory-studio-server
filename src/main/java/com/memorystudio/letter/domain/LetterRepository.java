@@ -1,6 +1,5 @@
 package com.memorystudio.letter.domain;
 
-import com.memorystudio.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

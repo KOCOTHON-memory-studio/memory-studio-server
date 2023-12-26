@@ -24,7 +24,7 @@ public class LetterController {
         letterService.saveLetter(letterDto);
     }
 
-    @GetMapping("/api/")
+    @GetMapping("/api/letters")
     public List<LetterListDTO> getLetterList(@RequestParam Long userId) {
         return letterService.getLetterList(userId);
     }
