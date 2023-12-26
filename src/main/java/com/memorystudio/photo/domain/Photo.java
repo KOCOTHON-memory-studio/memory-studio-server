@@ -3,11 +3,15 @@ package com.memorystudio.photo.domain;
 import com.memorystudio.groupMember.Domain.GroupMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Getter
+@Builder
 public class Photo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

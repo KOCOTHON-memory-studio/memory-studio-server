@@ -1,14 +1,16 @@
 package com.memorystudio.groupMember.Domain;
 
 import com.memorystudio.group.Domain.Group;
-// import com.memorystudio.member.Domain.Member;
+import com.memorystudio.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class GroupMember {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,7 @@ public class GroupMember {
     @JoinColumn(name = "id")
     private Group group;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
