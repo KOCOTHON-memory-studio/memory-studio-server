@@ -16,11 +16,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GroupMember {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "group_memeber_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @ManyToOne

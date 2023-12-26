@@ -5,14 +5,13 @@ import com.memorystudio.group.Domain.GroupRepository;
 import com.memorystudio.groupMember.Domain.GroupMember;
 import com.memorystudio.groupMember.Domain.GroupMemberRepository;
 import com.memorystudio.groupMember.dto.GroupMemberDTO;
-import com.memorystudio.member.MemberRepository;
+import com.memorystudio.member.domain.MemberRepository;
 import com.memorystudio.member.domain.Member;
 import com.memorystudio.member.dto.MemberIdNameDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

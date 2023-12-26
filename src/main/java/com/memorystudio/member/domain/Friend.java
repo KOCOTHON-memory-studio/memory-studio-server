@@ -17,6 +17,6 @@ public class Friend {
     Member member1;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id2")
     Member member2;
 }

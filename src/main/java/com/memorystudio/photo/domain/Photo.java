@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Photo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "photo_id")
     private Long id;
 
     @Column
@@ -24,6 +25,6 @@ public class Photo {
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "group_member_id")
     private GroupMember groupMember;
 }
