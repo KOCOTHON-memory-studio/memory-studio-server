@@ -1,6 +1,7 @@
 package com.memorystudio.member.domain;
 
 import com.memorystudio.groupMember.Domain.GroupMember;
+import com.memorystudio.member.dto.SignupRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,14 @@ public class Member {
     private Long id;
 
     private String name;
+    private String userId;
     private String email;
     private String password;
 
+    public Member(SignupRequestDTO request) {
+        this.name = request.getName();
+        this.userId = request.getUserId();
+        this.email = request.getEmail();
+        this.password = request.getPassword1();
+    }
 }
