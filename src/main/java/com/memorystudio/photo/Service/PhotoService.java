@@ -1,54 +1,43 @@
 package com.memorystudio.photo.Service;
 
-import com.memorystudio.photo.Dto.PhotoDto;
+import com.memorystudio.groupMember.Domain.GroupMember;
+import com.memorystudio.groupMember.Domain.GroupMemberRepository;
+import com.memorystudio.photo.Dto.*;
 import com.memorystudio.photo.domain.Photo;
 import com.memorystudio.photo.domain.PhotoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class PhotoService {
 
-    private final String PATH = "/Users/w/Downloads/memorystudio/photo/";
-
-
     private final PhotoRepository photoRepository;
+    private final GroupMemberRepository groupMemberRepository;
 
-    public PhotoDto getPhoto(Long id) {
-        Optional<Photo> optionalPhoto = photoRepository.findById(id);
-        if (optionalPhoto.isPresent()) {
-            return PhotoDto.builder()
-                    .id(optionalPhoto.get().getId())
-                    .dir(optionalPhoto.get().getDir())
-                    .date(optionalPhoto.get().getDate())
-                    .groupMember(optionalPhoto.get().getGroupMember().getId())
-                    .build();
-        } else {
-            throw new RuntimeException("no Photo");
-        }
+    public Photo save(PhotoSaveDTO request) {
+        GroupMember groupMember = groupMemberRepository.findById(request.getGroupMemberId()).
+                orElseThrow(IllegalArgumentException::new);
+        return photoRepository.save(new Photo(request, groupMember));
     }
 
+    public List<PhotoResponseDTO> getPhotoMonth(PhotoMonthRequestDTO request) {
+        return photoRepository.findAllByMonthAndGroupId(request.getMonth(), request.getGroupId()).stream()
+                .map(PhotoResponseDTO::new)
+                .toList();
+    }
 
-    public String save(MultipartFile file) throws IOException {
-        String filePath = PATH + file.getOriginalFilename();
-        Photo photo = photoRepository.save(
-                Photo.builder()
-                        .name(file.getOriginalFilename())
-                        .dir(filePath)
-                        .build()
-        );
+    public List<PhotoDetailResponseDTO> getPhotoDetail(PhotoDetailRequestDTO request) {
 
-        // 파일 결로
-        file.transferTo(new File(filePath));
-        if (photo != null) {
-            return "file uploaded successfully! filePath : " + filePath;
-        }
-        return null;
+        List<PhotoDetailResponseDTO> photoLinkedList = photoRepository
+                .findAllByMonthAndDateAndGroupId(
+                        request.getMonth(),
+                        request.getDate(),
+                        request.getGroupId()).stream()
+                .map(PhotoDetailResponseDTO::new)
+                .toList();
+        return photoLinkedList;
     }
 }
