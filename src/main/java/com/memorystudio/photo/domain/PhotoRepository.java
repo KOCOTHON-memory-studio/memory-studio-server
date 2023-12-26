@@ -1,8 +1,6 @@
 package com.memorystudio.photo.domain;
 
-import com.memorystudio.group.Domain.Group;
 import com.memorystudio.groupMember.Domain.GroupMember;
-import com.memorystudio.letter.domain.Letter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
