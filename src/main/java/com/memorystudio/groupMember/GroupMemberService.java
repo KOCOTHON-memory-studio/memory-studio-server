@@ -17,9 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GroupMemberService {
 
-    private GroupMemberRepository groupMemberRepository;
-    private GroupRepository groupRepository;
-    private MemberRepository memberRepository;
+    private final GroupMemberRepository groupMemberRepository;
+    private final GroupRepository groupRepository;
+    private final MemberRepository memberRepository;
 
     public void save(GroupMemberDTO request) {
 

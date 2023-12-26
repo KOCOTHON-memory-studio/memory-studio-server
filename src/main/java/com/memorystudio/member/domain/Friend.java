@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Setter
+@NoArgsConstructor
 public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +20,9 @@ public class Friend {
     @ManyToOne
     @JoinColumn(name = "member_id2")
     Member member2;
+
+    public Friend(Member member1, Member member2) {
+        this.member1 = member1;
+        this.member2 = member2;
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GroupMemberController {
 
-    private GroupMemberService groupMemberService;
+    private final GroupMemberService groupMemberService;
 
     @PostMapping("/api/group_member")
     public void addMapping(@RequestBody GroupMemberDTO request) {
